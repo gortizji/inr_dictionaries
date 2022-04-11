@@ -61,7 +61,7 @@ This script will save the resulting pdf figures under `figures/figure_5/`.
 
 ### Meta-learning pretraining <a id="meta-learning"></a>
 
-For completion we provide a standalone script `meta_learn.py` to meta-train a SIREN network on the CelebA dataset. The code of this script has been taken from [Tancik et al. 2021.](https://github.com/tancik/learnit). Running this script will override the weights in `maml_celebA_5000.pickle`.
+For completeness we provide a standalone script `meta_learn.py` to meta-train a SIREN network on the CelebA dataset. The code of this script has been taken from [Tancik et al. 2021.](https://github.com/tancik/learnit). Running this script will override the weights in `maml_celebA_5000.pickle`.
 
 
 ## Reference
