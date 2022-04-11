@@ -1,0 +1,17 @@
+jax==0.3.4
+jaxlib==0.3.2+cuda11.cudnn82
+dm-haiku==0.0.6
+flax==0.4.1
+neural-tangents
+imageio
+matplotlib
+scikit-image
+scikit-learn
+tensorflow
+tensorflow-datasets
+tqdm
+scipy
+seaborn
+pickle5
+
+--find-links https://storage.googleapis.com/jax-releases/jax_releases.html
