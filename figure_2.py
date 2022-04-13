@@ -1,8 +1,10 @@
+import os
 import imageio
 import jax
 import matplotlib.pyplot as plt
 import numpy as np
 from skimage.transform import resize
+import warnings
 
 from models.models_flax import FFN
 from train.standard import fit_image
@@ -15,25 +17,30 @@ def plot_reconstructions(
     image_GT,
     save_phrase="",
 ):
+    
+    outdir = os.path.join(os.getcwd(), "figures", "figure_2")
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+    
     # Show final network outputs
     plt.figure(figsize=(12, 4))
     rec = outputs["pred_imgs"][-1]
     plt.imshow(rec)
     plt.axis("off")
-    plt.savefig("figures/figure_2/rec_" + save_phrase + ".pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/rec_" + save_phrase + ".pdf", bbox_inches="tight")
 
     plt.figure()
     plt.imshow(image_GT)
     plt.axis("off")
-    plt.savefig("figures/figure_2/gt_" + save_phrase + ".pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/gt_" + save_phrase + ".pdf", bbox_inches="tight")
 
     plt.figure()
     plot_fourier_tranform(rec)
-    plt.savefig("figures/figure_2/rec_ft_" + save_phrase + ".pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/rec_ft_" + save_phrase + ".pdf", bbox_inches="tight")
 
     plt.figure()
     plot_fourier_tranform(image_GT)
-    plt.savefig("figures/figure_2/gt_ft_" + save_phrase + ".pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/gt_ft_" + save_phrase + ".pdf", bbox_inches="tight")
 
 
 def train_and_plot_image(
@@ -76,6 +83,9 @@ def train_and_plot_image(
 
 
 if __name__ == "__main__":
+    warnings.filterwarnings("default", category=FutureWarning)
+    warnings.filterwarnings("default", category=ImportWarning)
+    
     # save GT image and create test/train data
     image_url = "https://i.imgur.com/OQnG76L.jpeg"
     img = imageio.imread(image_url)
