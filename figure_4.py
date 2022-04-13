@@ -1,3 +1,4 @@
+import os
 import pickle
 
 import haiku as hk
@@ -52,6 +53,10 @@ if __name__ == "__main__":
     BATCH_SIZE = 256
     NUM_EXAMPLES = 100
     DEFAULT_GRID = jnp.reshape(DEFAULT_GRID, [-1, 2])
+    
+    outdir = os.path.join(os.getcwd(), "figures", "figure_4")
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
     ds_test = CELEBA_BUILDER.as_dataset(
         split="test", as_supervised=False, shuffle_files=False, batch_size=1
@@ -294,7 +299,7 @@ if __name__ == "__main__":
     lgd = ax.legend(loc=(1.01, 0.01))
 
     plt.savefig(
-        "figures/figure_4/fig4.pdf",
+        outdir + "/fig4.pdf",
         bbox_extra_artists=(lgd,),
         bbox_inches="tight",
     )

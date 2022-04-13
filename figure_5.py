@@ -1,3 +1,4 @@
+import os
 import pickle
 
 import haiku as hk
@@ -23,6 +24,9 @@ def show_ntk_eigval_eigvec(
     savefig=False,
     keyword="",
 ):
+    outdir = os.path.join(os.getcwd(), "figures", "figure_5")
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
     eigvals, eigvecs, ntk_matrix = ntk_eigendecomposition(model.apply, params, data, batch_size)
 
@@ -30,7 +34,7 @@ def show_ntk_eigval_eigvec(
     plt.plot(eigvals)
     sns.despine()
     if savefig:
-        plt.savefig("figures/figure_5/" + keyword + "eigvals" + ".pdf", bbox_inches="tight")
+        plt.savefig(outdir + os.path.sep + keyword + "eigvals" + ".pdf", bbox_inches="tight")
     plt.close()
 
     plt.figure()
@@ -38,7 +42,7 @@ def show_ntk_eigval_eigvec(
     sns.despine()
     if savefig:
         plt.savefig(
-            "figures/figure_5/" + keyword + "eigvals_normalized" + ".pdf",
+            outdir + os.path.sep + keyword + "eigvals_normalized" + ".pdf",
             bbox_inches="tight",
         )
     plt.close()
@@ -52,7 +56,7 @@ def show_ntk_eigval_eigvec(
         plt.axis("off")
         if savefig:
             plt.savefig(
-                "figures/figure_5/" + keyword + "eigvec" + str(i) + ".pdf",
+                outdir + os.path.sep + keyword + "eigvec" + str(i) + ".pdf",
                 bbox_inches="tight",
             )
 

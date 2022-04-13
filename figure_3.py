@@ -1,3 +1,4 @@
+import os
 import jax
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
@@ -105,6 +106,10 @@ if __name__ == "__main__":
     NUM_SAMPLES = 256
     ITERS = 2000
     LEARNING_RATE = 1e-4
+    
+    outdir = os.path.join(os.getcwd(), "figures", "figure_3")
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
     # Part I
     print("Fitting sinusoid with SIREN-30")
@@ -169,7 +174,7 @@ if __name__ == "__main__":
         fontsize=25,
     )
     plt.ylim([-130, 90])
-    plt.savefig("figures/figure_3/train_grid_merged_30.pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/train_grid_merged_30.pdf", bbox_inches="tight")
     sns.set_context("paper", font_scale=3)
 
     fig, ax = plt.subplots()
@@ -218,7 +223,7 @@ if __name__ == "__main__":
     sns.despine()
     ax.set_yticks([-30, 0, 30])
     plt.legend(loc=(0.8, 0.7))
-    plt.savefig("figures/figure_3/test_grid_merged_30.pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/test_grid_merged_30.pdf", bbox_inches="tight")
 
     # Part II
     print("Fitting sinusoid with SIREN-300")
@@ -306,7 +311,7 @@ if __name__ == "__main__":
     )
     sns.despine()
     ax.set_yticks([0, 20, 40])
-    plt.savefig("figures/figure_3/test_grid_merged_128_300.pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/test_grid_merged_128_300.pdf", bbox_inches="tight")
 
     sns.set_context("paper", font_scale=3)
     fig, ax = plt.subplots()
@@ -353,4 +358,4 @@ if __name__ == "__main__":
         color="darkgreen",
         fontsize=25,
     )
-    plt.savefig("figures/figure_3/train_grid_merged_128_300.pdf", bbox_inches="tight")
+    plt.savefig(outdir + "/train_grid_merged_128_300.pdf", bbox_inches="tight")
